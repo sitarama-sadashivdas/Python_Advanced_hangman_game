@@ -6,9 +6,9 @@ def generate_random_word(length):
     letters = string.ascii_lowercase  # Use lowercase letters
     return ''.join(random.choice(letters) for _ in range(length))
 
-def choose_word(l):
+def choose_word(length):
     # Generate a random word of the given length
-    return generate_random_word(l)
+    return generate_random_word(length)
 
 def display_hangman(tries):
     stages = [
@@ -84,7 +84,7 @@ def play_hangman(length):
     print("\n")
 
     while not guessed and tries > 0:
-        print('guesses left' , tries)
+        print('Guesses left:', tries)
         guess = input("Please guess a letter or word: ").lower()
         
         if len(guess) == 1:  # If the user guessed a letter
@@ -121,19 +121,31 @@ def play_hangman(length):
             print("Invalid guess.")
 
         print(display_hangman(tries))
-        print("Word to guess: " + word_completion)
+        if tries >0 :
+            print("Word to guess: " + word_completion)
         print("\n")
 
     if guessed:
-        print("Congratulations! 🎊🌟🌟🌟🎊 You've guessed the word! It was " + word + ".")
+        print("Congratulations! 🎊🌟🌟🌟🎊  You've guessed the word! It was " + word + ".")
     else:
         print("Sorry, you've run out of tries. The word was " + word + ".")
+    
+    print("\nWanna play again? (YES or NO)")
+    ans = input().strip().upper()
+    return ans == 'YES'  # Return True if the user wants to play again
 
-if __name__ == '__main__':
+def main():
     print(' -: Advanced Word Guessing Hangman Game :- ')
     name = input("What is your name? ")
     print("Hello, " + name + ", time to play hangman!")
-    time.sleep(1)  # Pause for a second before starting
-    length = int(input('Length of the guessing word: '))  # Ask for length here
-    play_hangman(length)
+    time.sleep(1)
 
+    while True:  # Loop to keep playing the game
+        length = int(input('Length of the guessing word: '))  # Ask for length here
+        play_again = play_hangman(length)
+        if not play_again:
+            print('Thanks for playing !!')
+            break  # Exit the loop if the player does not want to play again
+
+if __name__ == '__main__':
+    main()
