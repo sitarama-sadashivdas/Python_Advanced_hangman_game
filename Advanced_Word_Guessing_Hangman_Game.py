@@ -125,7 +125,7 @@ def play_hangman(length):
         print("\n")
 
     if guessed:
-        print("Congratulations! You've guessed the word! It was " + word + ".")
+        print("Congratulations! 🎊🌟🌟🌟🎊 You've guessed the word! It was " + word + ".")
     else:
         print("Sorry, you've run out of tries. The word was " + word + ".")
 
